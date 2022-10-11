@@ -1,0 +1,111 @@
+<?xml version="1.0" ?>
+<robot name="testprojectmr" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find testprojectmr_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find testprojectmr_description)/urdf/testprojectmr.trans" />
+<xacro:include filename="$(find testprojectmr_description)/urdf/testprojectmr.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.013575333281833109 -2.3543507324461306e-17 0.002227611071885382" rpy="0 0 0"/>
+    <mass value="1.5162425271912718"/>
+    <inertia ixx="0.001348" iyy="0.005216" izz="0.006043" ixy="-0.0" iyz="-0.0" ixz="-0.000341"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://testprojectmr_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://testprojectmr_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_1">
+  <inertial>
+    <origin xyz="0.0 0.0025000000000000022 -3.469446951953614e-18" rpy="0 0 0"/>
+    <mass value="0.11097676048805946"/>
+    <inertia ixx="2.5e-05" iyy="5e-05" izz="2.5e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.08 -0.055 0.02" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://testprojectmr_description/meshes/left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.08 -0.055 0.02" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://testprojectmr_description/meshes/left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_1">
+  <inertial>
+    <origin xyz="-2.7755575615628914e-17 -0.0025000000000000022 -3.469446951953614e-18" rpy="0 0 0"/>
+    <mass value="0.11097676048805946"/>
+    <inertia ixx="2.5e-05" iyy="5e-05" izz="2.5e-05" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.08 0.055 0.02" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://testprojectmr_description/meshes/right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.08 0.055 0.02" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://testprojectmr_description/meshes/right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="0.0 4.825019250101691e-18 0.015000000000000006" rpy="0 0 0"/>
+    <mass value="0.46240316870024756"/>
+    <inertia ixx="0.000107" iyy="0.000107" izz="0.000145" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.05 -0.0 -0.025" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://testprojectmr_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.05 -0.0 -0.025" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://testprojectmr_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rev1" type="continuous">
+  <origin xyz="-0.08 0.055 -0.02" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Rev2" type="continuous">
+  <origin xyz="-0.08 -0.055 -0.02" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+</joint>
+
+<joint name="Rigid3" type="fixed">
+  <origin xyz="0.05 0.0 0.025" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+</joint>
+
+</robot>
